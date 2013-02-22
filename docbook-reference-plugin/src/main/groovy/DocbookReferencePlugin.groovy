@@ -54,6 +54,8 @@ class DocbookReferencePlugin implements Plugin<Project> {
 
             ext.sourceDir = null // e.g. new File('src/reference')
             ext.outputDir = new File(project.buildDir, "reference")
+            ext.sourceCommonAssetsDir = null
+            ext.sourceFileName = 'index.xml'
             ext.pdfFilename = "${project.rootProject.name}-reference.pdf"
 
             outputs.dir outputDir
@@ -77,8 +79,11 @@ abstract class AbstractDocbookReferenceTask extends DefaultTask {
     @InputDirectory
     File sourceDir // e.g. 'src/reference'
 
+    @InputDirectory
+    File sourceCommonAssetsDir // For CSS and image assets common across a number of documents in the project
+
     @Input
-    String sourceFileName = 'index.xml';
+    String sourceFileName // e.g. 'index.xml';
 
     String stylesheet;
 
@@ -282,6 +287,12 @@ abstract class AbstractDocbookReferenceTask extends DefaultTask {
         }
 
         // allow for project provided resources to override
+        if (sourceCommonAssetsDir) {
+            project.copy {
+                into targetPath
+                from "${sourceCommonAssetsDir}/images"
+            }
+        }
         project.copy {
             into targetPath
             from "${sourceDir}/images"
@@ -300,6 +311,12 @@ abstract class AbstractDocbookReferenceTask extends DefaultTask {
         }
 
         // allow for project provided resources to override
+        if (sourceCommonAssetsDir) {
+            project.copy {
+                into targetPath
+                from "${sourceCommonAssetsDir}/css"
+            }
+        }
         project.copy {
             into targetPath
             from "${sourceDir}/css"
