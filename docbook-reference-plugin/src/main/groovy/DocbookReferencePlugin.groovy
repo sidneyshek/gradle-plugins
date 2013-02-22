@@ -66,6 +66,14 @@ class DocbookReferencePlugin implements Plugin<Project> {
             if (single.sourceDir == null) single.sourceDir = reference.sourceDir
             if (pdf.sourceDir == null) pdf.sourceDir = reference.sourceDir
 
+            if (multi.sourceCommonAssetsDir == null) multi.sourceCommonAssetsDir = reference.sourceCommonAssetsDir
+            if (single.sourceCommonAssetsDir == null) single.sourceCommonAssetsDir = reference.sourceCommonAssetsDir
+            if (pdf.sourceCommonAssetsDir == null) pdf.sourceCommonAssetsDir = reference.sourceCommonAssetsDir
+
+            if (multi.sourceFileName == null) multi.sourceFileName = reference.sourceFileName
+            if (single.sourceFileName == null) single.sourceFileName = reference.sourceFileName
+            if (pdf.sourceFileName == null) pdf.sourceFileName = reference.sourceFileName
+
             if (multi.outputDir == null) multi.outputDir = reference.outputDir
             if (single.outputDir == null) single.outputDir = reference.outputDir
             if (pdf.outputDir == null) pdf.outputDir = reference.outputDir
